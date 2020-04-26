@@ -166,7 +166,7 @@ public class Service1 extends Service {
 
 
             Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setContentTitle("Example Service")
+                    .setContentTitle("SoloCoin")
                     .setContentText("Lat: " + latLng.latitude + "& lon: " + latLng.longitude)
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentIntent(pendingIntent)
