@@ -25,14 +25,22 @@ public class DisplaPoints extends AppCompatActivity {
         tv = findViewById(R.id.textView);
         Paper.init(DisplaPoints.this);
 
-        points = Paper.book().read("points");
+        if(Paper.book().read("points")!=null)
+        {
+            points = Paper.book().read("points");
+        }
+
 
         Timer timer = new Timer ();
         TimerTask hourlyTask = new TimerTask () {
             @Override
             public void run () {
                 // your code here...
-                points = Paper.book().read("points");
+                if(Paper.book().read("points")!=null)
+                {
+                    points = Paper.book().read("points");
+                }
+
                 runOnUiThread(new Runnable() {
 
                     @Override

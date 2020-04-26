@@ -12,6 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Stop"
+        android:background="@drawable/white_border"
+        android:backgroundTint="#E86D9A"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -20,6 +25,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
+
+        android:padding="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:backgroundTint="#A9F39A"
+        android:background="@drawable/white_border"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -27,8 +38,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/checkScore"
+        android:padding="10dp"
         android:text="Check Score"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#399CF3"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/white_border"
+        android:layout_margin="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
