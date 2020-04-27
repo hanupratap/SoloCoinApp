@@ -68,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setMyLocationEnabled(true);
         Paper.init(MapsActivity.this);
-        Paper.book().write("time", 1000*60*10);
+        Paper.book().write("time", 1000*6);
         Paper.book().write("service", 0);
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -80,7 +80,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.clear();
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
                 mMap.addMarker(markerOptions);
-
                 pos_set = true;
                 btn.setEnabled(true);
             }

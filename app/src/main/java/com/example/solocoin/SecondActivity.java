@@ -65,6 +65,8 @@ public class SecondActivity extends AppCompatActivity {
 
         progressBar.setMax(100);
         progressBar.setMin(0);
+        Paper.init(this);
+
 
         Timer timer = new Timer ();
         TimerTask hourlyTask = new TimerTask () {
@@ -82,13 +84,15 @@ public class SecondActivity extends AppCompatActivity {
                         timeval = Float.parseFloat(String.valueOf(Paper.book().read("time")))/60000;
                         time.setText("Time Remaining (in mins) : " + df.format(timeval));
 
-                        if((int)Paper.book().read("service")==0)
-                        {
-                            start.setEnabled(true);
-                        }
-                        else {
-                            start.setEnabled(false);
-                        }
+
+                            if((int)Paper.book().read("service")==0)
+                            {
+                                start.setEnabled(true);
+                            }
+                            else {
+                                start.setEnabled(false);
+                            }
+
 
 
                     }
@@ -114,7 +118,7 @@ public class SecondActivity extends AppCompatActivity {
     void startService()
     {
         timerunning = true;
-        Paper.init(this);
+
         Intent serviceIntent = new Intent(this, Service1.class);
         LatLng latLng = Paper.book().read("position");
         Toast.makeText(this, latLng.toString(), Toast.LENGTH_SHORT).show();
