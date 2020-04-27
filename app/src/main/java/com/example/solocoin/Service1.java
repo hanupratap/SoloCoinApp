@@ -49,6 +49,7 @@ public class Service1 extends Service {
     int points = 0;
     Timer timer;
 
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -185,13 +186,14 @@ public class Service1 extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Toast.makeText(this, "Service started", Toast.LENGTH_SHORT).show();
 
-        latLng = (LatLng) intent.getParcelableExtra("position");
-        Intent notificationIntent = new Intent(Service1.this, SecondActivity.class);
-        notificationIntent.putExtra("position", latLng);
-        PendingIntent pendingIntent = PendingIntent.getActivity(Service1.this,
-                0, notificationIntent, 0);
+            Toast.makeText(this, "Service started" + flags + startId, Toast.LENGTH_SHORT).show();
+
+            latLng = (LatLng) intent.getParcelableExtra("position");
+            Intent notificationIntent = new Intent(Service1.this, SecondActivity.class);
+            notificationIntent.putExtra("position", latLng);
+            PendingIntent pendingIntent = PendingIntent.getActivity(Service1.this,
+                    0, notificationIntent, 0);
 
 
             Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -205,25 +207,24 @@ public class Service1 extends Service {
 
 
 
-        timer = new Timer ();
-        TimerTask hourlyTask = new TimerTask () {
-            @Override
-            public void run () {
-                // your code here...
-                if(isserviceRunning==false)
-                {
-                    timer.cancel();
-                    timer.purge();
+            timer = new Timer ();
+            TimerTask hourlyTask = new TimerTask () {
+                @Override
+                public void run () {
+                    // your code here...
+                    if(isserviceRunning==false)
+                    {
+                        timer.cancel();
+                        timer.purge();
+                    }
+
+                    getlocation();
+
                 }
-
-                getlocation();
-
-            }
-        };
+            };
 
 // schedule the task to run starting now and then every hour...
-        timer.schedule (hourlyTask, 0l, 1000*60*10 );   // 1000*10*60 every 10 minutes
-
+            timer.schedule (hourlyTask, 0l, 1000*60*10 );   // 1000*10*60 every 10 minutes
 
 
         return START_NOT_STICKY;

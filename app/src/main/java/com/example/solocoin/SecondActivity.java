@@ -33,7 +33,8 @@ import io.paperdb.Paper;
 
 public class SecondActivity extends AppCompatActivity {
     private Location currentLocation;
-    Button cs, stop, start;
+    Button cs, stop;
+    //Button start;
     TextView time;
     FusedLocationProviderClient fusedLocationProviderClient;
     CoordinatorLayout linear;
@@ -48,13 +49,14 @@ public class SecondActivity extends AppCompatActivity {
         cs = findViewById(R.id.checkScore);
         stop = findViewById(R.id.stopService);
         time = findViewById(R.id.timer);
-        start = findViewById(R.id.startService);
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startService();
-            }
-        });
+        //start = findViewById(R.id.startService);
+//        start.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+        startService();
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +65,7 @@ public class SecondActivity extends AppCompatActivity {
         });
         progressBar = findViewById(R.id.progressBar);
 
-        progressBar.setMax(10);
+        progressBar.setMax(100);
         progressBar.setMin(0);
 
         Timer timer = new Timer ();
@@ -76,12 +78,12 @@ public class SecondActivity extends AppCompatActivity {
                     public void run() {
 
                         // Stuff that updates the UI
-                        DecimalFormat df = new DecimalFormat("#.##");
+                        progressBar.setProgress(Math.round(timeval*10));
+                        DecimalFormat df = new DecimalFormat("#.#");
                         df.setRoundingMode(RoundingMode.CEILING);
                         timeval = Float.parseFloat(String.valueOf(Paper.book().read("time")))/60000;
                         time.setText("Time Remaining (in mins) : " + df.format(timeval));
 
-                        progressBar.setProgress(Math.round(timeval));
 
                     }
 
