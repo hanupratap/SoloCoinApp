@@ -33,8 +33,7 @@ import io.paperdb.Paper;
 
 public class SecondActivity extends AppCompatActivity {
     private Location currentLocation;
-    Button cs, stop;
-    //Button start;
+    Button cs, stop, start;
     TextView time;
     FusedLocationProviderClient fusedLocationProviderClient;
     CoordinatorLayout linear;
@@ -49,14 +48,13 @@ public class SecondActivity extends AppCompatActivity {
         cs = findViewById(R.id.checkScore);
         stop = findViewById(R.id.stopService);
         time = findViewById(R.id.timer);
-        //start = findViewById(R.id.startService);
-//        start.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-        startService();
+        start = findViewById(R.id.startService);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startService();
+            }
+        });
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +81,14 @@ public class SecondActivity extends AppCompatActivity {
                         df.setRoundingMode(RoundingMode.CEILING);
                         timeval = Float.parseFloat(String.valueOf(Paper.book().read("time")))/60000;
                         time.setText("Time Remaining (in mins) : " + df.format(timeval));
+
+                        if((int)Paper.book().read("service")==0)
+                        {
+                            start.setEnabled(true);
+                        }
+                        else {
+                            start.setEnabled(false);
+                        }
 
 
                     }
@@ -112,7 +118,6 @@ public class SecondActivity extends AppCompatActivity {
         Intent serviceIntent = new Intent(this, Service1.class);
         LatLng latLng = Paper.book().read("position");
         Toast.makeText(this, latLng.toString(), Toast.LENGTH_SHORT).show();
-
         serviceIntent.putExtra("position", latLng);
         startService(serviceIntent);
     }

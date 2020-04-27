@@ -239,6 +239,7 @@ public class Service1 extends Service {
             points = Paper.book().read("points");
         else
             Paper.book().write("points", 0);
+        Paper.book().write("service", 1);
         Toast.makeText(this, "Created", Toast.LENGTH_SHORT).show();
     }
 
@@ -247,5 +248,6 @@ public class Service1 extends Service {
     public void onDestroy() {
         super.onDestroy();
         isserviceRunning=false;
+        Paper.book().write("service", 0);
     }
 }
