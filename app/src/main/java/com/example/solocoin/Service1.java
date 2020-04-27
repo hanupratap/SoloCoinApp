@@ -12,6 +12,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.view.View;
@@ -54,6 +55,30 @@ public class Service1 extends Service {
         return null;
     }
 
+
+    void timer()
+    {
+        new CountDownTimer(1000*60*10, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+                Paper.book().write("time", millisUntilFinished);
+                if(isserviceRunning==false)
+                {
+                    cancel();
+                }
+            }
+
+            public void onFinish() {
+                start();
+            }
+        }.start();
+
+
+
+    }
+
+
     void getlocation() {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -91,8 +116,12 @@ public class Service1 extends Service {
 
                                 else
                                 {
-                                    points = points - 10;
-                                    Toast.makeText(Service1.this, "10 Points deducted, distance = " + dist[0], Toast.LENGTH_SHORT).show();
+                                    if(points!=0)
+                                    {
+                                        points = points - 10;
+                                        Toast.makeText(Service1.this, "10 Points deducted, distance = " + dist[0], Toast.LENGTH_SHORT).show();
+                                    }
+
 
                                 }
 
@@ -193,7 +222,7 @@ public class Service1 extends Service {
         };
 
 // schedule the task to run starting now and then every hour...
-        timer.schedule (hourlyTask, 0l, 1000*60*60 );   // 1000*10*60 every 10 minutes
+        timer.schedule (hourlyTask, 0l, 1000*60*10 );   // 1000*10*60 every 10 minutes
 
 
 
@@ -204,6 +233,7 @@ public class Service1 extends Service {
     public void onCreate() {
         super.onCreate();
         Paper.init(this);
+        timer();
         if(Paper.book().read("points")!=null)
             points = Paper.book().read("points");
         else

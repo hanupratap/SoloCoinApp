@@ -67,6 +67,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
 
         mMap.setMyLocationEnabled(true);
+        Paper.init(MapsActivity.this);
+        Paper.book().write("time", 1000*60*10);
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override

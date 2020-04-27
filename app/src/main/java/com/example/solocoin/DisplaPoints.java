@@ -55,7 +55,7 @@ public class DisplaPoints extends AppCompatActivity {
         };
 
 // schedule the task to run starting now and then every hour...
-        timer.schedule (hourlyTask, 0l, 10 );   // 1000*10*60 every 10 minut
+        timer.schedule (hourlyTask, 0l, 10 );
 
 
 
